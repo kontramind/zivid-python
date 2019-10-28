@@ -9,6 +9,8 @@
 
 #include <ZividPython/Wrapper.h>
 
+#include <pybind11/pybind11.h>
+
 namespace ZividPython
 {
     enum class WrapType
@@ -55,6 +57,10 @@ namespace ZividPython
     ZividPython::wrapClass<Zivid::name, ZividPython::WrapType::normal>(                                                \
         dest, static_cast<void (*)(pybind11::class_<Zivid::name>)>(ZividPython::wrapClass), #name)
 
+#define ZIVID_PYTHON_WRAP_CLASS_FULLPATH(dest, name, full_path)                                                        \
+    ZividPython::wrapClass<full_path, ZividPython::WrapType::normal>(                                                  \
+        dest, static_cast<void (*)(pybind11::class_<full_path>)>(ZividPython::wrapClass), #name)
+
 #define ZIVID_PYTHON_WRAP_CLASS_AS_RELEASABLE(dest, name)                                                              \
     ZividPython::wrapClass<ZividPython::Releasable##name, ZividPython::WrapType::releasable>(                          \
         dest, static_cast<void (*)(pybind11::class_<ZividPython::Releasable##name>)>(ZividPython::wrapClass), #name)
@@ -70,7 +76,7 @@ namespace ZividPython
         #name,                                                                                                         \
         pybind11::buffer_protocol())
 
-#define ZIVID_PYTHON_WRAP_DATA_MODEL(dest, name) ZividPython::wrapDataModel(dest, Zivid::name{})
+#define ZIVID_PYTHON_WRAP_DATA_MODEL(dest, name) ZividPython::wrapDataModel(dest, name{})
 
 #define ZIVID_PYTHON_WRAP_NAMESPACE_AS_SUBMODULE(dest, name)                                                           \
     ZividPython::wrapNamespaceAsSubmodule(dest, ZividPython::name::wrapAsSubmodule, #name)
