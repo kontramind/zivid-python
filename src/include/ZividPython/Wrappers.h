@@ -9,6 +9,8 @@
 
 #include <ZividPython/Wrapper.h>
 
+#include <pybind11/pybind11.h>
+
 namespace ZividPython
 {
     enum class WrapType
@@ -70,7 +72,7 @@ namespace ZividPython
         #name,                                                                                                         \
         pybind11::buffer_protocol())
 
-#define ZIVID_PYTHON_WRAP_DATA_MODEL(dest, name) ZividPython::wrapDataModel(dest, Zivid::name{})
+#define ZIVID_PYTHON_WRAP_DATA_MODEL(dest, name) ZividPython::wrapDataModel(dest, name{})
 
 #define ZIVID_PYTHON_WRAP_NAMESPACE_AS_SUBMODULE(dest, name)                                                           \
     ZividPython::wrapNamespaceAsSubmodule(dest, ZividPython::name::wrapAsSubmodule, #name)

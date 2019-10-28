@@ -21,7 +21,7 @@ namespace ZividPython
         {
             pybind11::class_<Target> pyClass{ dest, Target::name, pybind11::dynamic_attr() };
 
-            pyClass.def(pybind11::init<>())
+            pyClass.def(pybind11::init())
                 .def("__repr__", &Target::toString)
                 .def("to_string", &Target::toString)
                 .def("set_from_string", &Target::setFromString, pybind11::arg("string_value"))
@@ -81,10 +81,9 @@ namespace ZividPython
                     std::string name{ MemberType::name };
                     std::transform(begin(name), end(name), begin(name), ::tolower);
 
-                    pyClass.def_property(
-                        name.c_str(),
-                        [](const Target &source) { return Detail::getHelper<MemberType>(source); },
-                        pybind11::overload_cast<const MemberType &>(&Target::set));
+                    pyClass.def_property(name.c_str(),
+                                         [](const Target &source) { return Detail::getHelper<MemberType>(source); },
+                                         pybind11::overload_cast<const MemberType &>(&Target::set));
                 });
             }
         }

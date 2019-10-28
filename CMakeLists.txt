@@ -13,5 +13,6 @@ endif()
 
 find_package(Zivid ${ZIVID_SDK_VERSION} EXACT COMPONENTS Core REQUIRED)
 find_package(pybind11 2.2.4 REQUIRED)
+find_package(Eigen3 3.3 REQUIRED)
 
 add_subdirectory(src)

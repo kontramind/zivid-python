@@ -19,6 +19,7 @@ from zivid.frame import Frame  # noqa: F401 'zivid.frame.Frame' imported but unu
 from zivid.frame_info import (
     FrameInfo,  # noqa: F401 'zivid.frame_info.FrameInfo' imported but unused
 )
+import zivid.handeye
 import zivid.hdr
 from zivid.sdk_version import SDKVersion
 from zivid.settings import (
