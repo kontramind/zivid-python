@@ -13,13 +13,22 @@ bashFiles=$(find "$ROOT_DIR" -name '*.sh')
 pip install "$ROOT_DIR" || exit $?
 pip install -r "$SCRIPT_DIR/../requirements-lint.txt" || exit $?
 
-echo Running pylint on:
-echo "$pythonFiles"
+echo Running non public pylint on:
+echo "$nonPublicPythonFiles"
 pylint \
     --rcfile "$ROOT_DIR/.pylintrc" \
     --extension-pkg-whitelist=_zivid \
     --generated-members=_zivid.* \
-    $pythonFiles \
+    $nonPublicPythonFiles \
+    || exit $?
+
+echo Running public pylint on:
+echo "$publicPythonFiles"
+pylint \
+    --rcfile "$ROOT_DIR/.pylintrc-packaged-files" \
+    --extension-pkg-whitelist=cv2 \
+    --generated-members=_zivid.* \
+    $publicPythonFiles \
     || exit $?
 
 echo Running non public flake8 on:

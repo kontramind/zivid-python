@@ -38,7 +38,7 @@ def _check_dependency(module_name, package_hint=None):
 
 
 def _main():
-    # This list is a duplicate of the build-system requirments in pyproject.toml.
+    # This list is a duplicate of the build-system requirements in pyproject.toml.
     # The purpose of these checks is to help users with PIP<19 lacking support for
     # pyproject.toml
     # Keep the two lists in sync
@@ -60,7 +60,7 @@ def _main():
         license="BSD 3-Clause",
         packages=["zivid", "_zivid"],
         package_dir={"": "modules"},
-        install_requires=["numpy"],
+        install_requires=["numpy", "conan"],
         cmake_args=[
             "-DZIVID_PYTHON_VERSION=" + _zivid_python_version(),
             "-DZIVID_SDK_VERSION=" + _zivid_sdk_version(),
