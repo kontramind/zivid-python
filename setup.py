@@ -6,7 +6,7 @@ def get_version():
 
 
 def _zivid_sdk_version():
-    return "1.5.0"
+    return "1.6.0"
 
 
 def _zivid_python_version():
@@ -38,7 +38,7 @@ def _check_dependency(module_name, package_hint=None):
 
 
 def _main():
-    # This list is a duplicate of the build-system requirments in pyproject.toml.
+    # This list is a duplicate of the build-system requirements in pyproject.toml.
     # The purpose of these checks is to help users with PIP<19 lacking support for
     # pyproject.toml
     # Keep the two lists in sync
