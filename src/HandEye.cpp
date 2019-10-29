@@ -4,6 +4,7 @@
 #include <Zivid/PointCloud.h>
 
 #include <ZividPython/Calibrate.h>
+#include <ZividPython/Detector.h>
 #include <ZividPython/Pose.h>
 #include <ZividPython/Wrappers.h>
 
@@ -32,8 +33,11 @@ namespace ZividPython::HandEye
 
     void wrapAsSubmodule(pybind11::module &dest)
     {
-        ZIVID_PYTHON_WRAP_CLASS(dest, HandEye::Pose);
-        ZIVID_PYTHON_WRAP_CLASS(dest, HandEye::CalibrationOutput);
+        using namespace Zivid::HandEye;
+
+        ZIVID_PYTHON_WRAP_CLASS(dest, Pose);
+        ZIVID_PYTHON_WRAP_CLASS(dest, CalibrationOutput);
+        ZIVID_PYTHON_WRAP_CLASS(dest, DetectionResult);
 
         dest.def("detect_feature_points", &Zivid::HandEye::detectFeaturePoints)
             .def("calibrate_eye_in_hand",

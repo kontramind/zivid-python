@@ -22,6 +22,8 @@ ZIVID_PYTHON_MODULE // NOLINT
 {
     module.attr("__version__") = pybind11::str(ZIVID_PYTHON_VERSION);
 
+    using namespace Zivid;
+
     ZIVID_PYTHON_WRAP_DATA_MODEL(module, Settings);
     ZIVID_PYTHON_WRAP_DATA_MODEL(module, CameraState);
     ZIVID_PYTHON_WRAP_DATA_MODEL(module, FrameInfo);
