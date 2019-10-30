@@ -1,6 +1,10 @@
+#include <Zivid/Frame.h>
 #include <ZividPython/PointCloud.h>
 
+#include <pybind11/numpy.h>
 #include <pybind11/pybind11.h>
+
+#include <stdexcept>
 
 namespace py = pybind11;
 
@@ -9,6 +13,25 @@ namespace py = pybind11;
 
 namespace
 {
+    auto toPointCloudSize(const py::buffer_info &info)
+    {
+        if(info.ndim != 2)
+        {
+            throw std::runtime_error("Point cloud dimension must be 2");
+        }
+
+        const auto rows = info.shape[0];
+        const auto cols = info.shape[1];
+
+        if(rows < 0 || cols < 0)
+        {
+            throw std::out_of_range{ "Invalid point cloud size [" + std::to_string(rows) + "," + std::to_string(cols)
+                                     + "]" };
+        }
+
+        return std::make_pair(static_cast<size_t>(rows), static_cast<size_t>(cols));
+    }
+
 #pragma pack(push)
     struct DataType
     {
@@ -41,6 +64,19 @@ namespace
                                 { pointCloud.height(), pointCloud.width() },
                                 { sizeof(DataType) * pointCloud.width(), sizeof(DataType) } };
     }
+
+    void copyFromBuffer(Zivid::PointCloud &dest, py::array_t<DataType> source)
+    {
+        const py::buffer_info info = source.request();
+
+        const auto [rows, cols] = toPointCloudSize(info);
+
+        // TODO: Make this work and delete line below
+        // dest.resize(rows, cols);
+        dest = Zivid::PointCloud{ rows, cols };
+
+        memcpy(dest.dataPtr(), static_cast<DataType *>(info.ptr), sizeof(DataType) * dest.size());
+    }
 } // namespace
 
 namespace ZividPython
@@ -49,6 +85,6 @@ namespace ZividPython
     {
         PYBIND11_NUMPY_DTYPE(DataType, x, y, z, contrast, b, g, r, a);
 
-        pyClass.def(py::init<>()).def_buffer(makeBufferInfo);
+        pyClass.def(py::init()).def_buffer(makeBufferInfo).def("__init__", copyFromBuffer);
     }
 } // namespace ZividPython
