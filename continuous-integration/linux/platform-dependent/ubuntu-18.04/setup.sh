@@ -16,6 +16,8 @@ apt-yes install \
     python3-venv \
     python3-pip \
     wget \
+    unzip \
+    cmake \
     || exit $?
 
 update-alternatives --install /usr/bin/python python /usr/bin/python3 0 || exit $?
@@ -46,3 +48,8 @@ function install_www_deb {
 
 install_www_deb https://www.zivid.com/hubfs/softwarefiles/releases/1.6.0+7a245bbe-26/u18/zivid-telicam-driver_2.0.0.1-1_amd64.deb || exit $?
 install_www_deb https://www.zivid.com/hubfs/softwarefiles/releases/1.6.0+7a245bbe-26/u18/zivid_1.6.0+7a245bbe-26_amd64.deb || exit $?
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+COMMON_SCRIPTS="$SCRIPT_DIR/../common"
+
+"$COMMON_SCRIPTS/install_eigen.sh" || exit $?

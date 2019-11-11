@@ -14,6 +14,9 @@ pacman -Syu --noconfirm --needed \
        python-pip \
        shellcheck \
        sudo \
+       wget \
+       unzip \
+       make \
     || exit $?
 
 function aur_install {
@@ -38,3 +41,8 @@ aur_install intel-opencl-runtime ncurses5-compat-libs || exit $?
 
 aur_install zivid-telicam-driver || exit $?
 aur_install zivid || exit $?
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+COMMON_SCRIPTS="$SCRIPT_DIR/../common"
+
+"$COMMON_SCRIPTS/install_eigen.sh" || exit $?

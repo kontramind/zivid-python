@@ -11,8 +11,10 @@ if(MSVC)
     add_compile_options(/bigobj)
 endif()
 
+#message(FATAL_ERROR "cmake prefix path: ${CMAKE_PREFIX_PATH} \n eigen_oath: ${Eigen3_DIR}")
+
 find_package(Zivid ${ZIVID_SDK_VERSION} EXACT COMPONENTS Core REQUIRED)
 find_package(pybind11 2.2.4 REQUIRED)
-find_package(Eigen3 3.3 REQUIRED)
+find_package(Eigen3 3.3 REQUIRED NO_MODULE)
 
 add_subdirectory(src)

@@ -65,6 +65,9 @@ def _main():
             "-DZIVID_PYTHON_VERSION=" + _zivid_python_version(),
             "-DZIVID_SDK_VERSION=" + _zivid_sdk_version(),
             "-Dpybind11_DIR=src/3rd-party/pybind11-2.2.4/share/cmake/pybind11/",
+            "-DEigen3_DIR=/host/zivid-python-dependencies/eigen-eigen-323c052e1731/cmake/",
+            # "-DCMAKE_PREFIX_PATH=/host/zivid-python-dependencies/eigen-eigen-323c052e1731/cmake/",
+            # "-DCMAKE_MODULE_PATH=/host/zivid-python-dependencies/eigen-eigen-323c052e1731/cmake/",
         ],
         classifiers=[
             "License :: OSI Approved :: BSD License",

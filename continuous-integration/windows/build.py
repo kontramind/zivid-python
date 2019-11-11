@@ -4,6 +4,7 @@ import sys
 import subprocess
 from pathlib import Path
 import requests
+import zipfile
 
 
 def _options():
@@ -45,6 +46,25 @@ def _setup():
         zivid_installer.write_bytes(response.content)
         print("Installing {}".format(zivid_installer), flush=True)
         _run_process((str(zivid_installer), "/S"))
+
+    _install_eigen()
+
+
+def _install_eigen():
+    with tempfile.TemporaryDirectory() as temp_dir:
+        # DEPS_DIR="$ROOT_DIR/zivid-python-dependencies"
+
+        eigen_url = "http://bitbucket.org/eigen/eigen/get/3.3.7.zip"
+        print("Downloading {}".format(eigen_url), flush=True)
+        eigen_zip = Path(temp_dir) / "3.3.7.zip"
+        response = requests.get(eigen_url)
+        eigen_zip.write_bytes(response.content)
+        with zipfile.ZipFile(eigen_zip) as zip_obj:
+            zip_obj.extractall(
+                Path(__file__).parent.parent.parent
+                / "zivid-python-dependencies"
+                / "eigen-eigen-323c052e1731"
+            )
 
 
 def _build(root):
