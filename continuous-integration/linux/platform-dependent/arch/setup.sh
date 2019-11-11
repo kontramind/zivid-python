@@ -17,6 +17,22 @@ pacman -Syu --noconfirm --needed \
        wget \
        unzip \
        make \
+       patch \
+       python-pyjwt \
+       python-yaml \
+       python-patch-ng \
+       python-fasteners \
+       python-node-semver \
+       python-bottle \
+       python-pluginbase \
+       python-pylint \
+       python-future \
+       python-pygments \
+       python-astroid \
+       python-deprecation \
+       python-tqdm \
+       python-jinja \
+       python-dateutil \
     || exit $?
 
 function aur_install {
@@ -41,6 +57,7 @@ aur_install intel-opencl-runtime ncurses5-compat-libs || exit $?
 
 aur_install zivid-telicam-driver || exit $?
 aur_install zivid || exit $?
+aur_install conan || exit $?
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 COMMON_SCRIPTS="$SCRIPT_DIR/../common"
