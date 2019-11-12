@@ -9,7 +9,20 @@ if [ $EUID != 0 ]; then
 fi
 
 conan install eigen/3.3.7@conan/stable || exit $?
-mkdir build && cd build && conan install .. || exit $?
+
+# conan profile new default --detect  || exit $? # Generates default profile detecting GCC and sets old ABI
+conan profile update settings.compiler.libcxx=libstdc++11 default  || exit $? # 
+
+[ -x build ] || mkdir -p build
+cd build || exit $? # 
+conan install .. || exit $? # 
+cd .. || exit $?
+conan create . conan/stable || exit $?
+
+
+#mkdir build && cd build && conan install .. || exit $?
+
+
 
 
 #SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"

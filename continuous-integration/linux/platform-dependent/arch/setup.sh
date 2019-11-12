@@ -20,11 +20,8 @@ pacman -Syu --noconfirm --needed \
        patch \
        python-pyjwt \
        python-yaml \
-       python-patch-ng \
        python-fasteners \
-       python-node-semver \
        python-bottle \
-       python-pluginbase \
        python-pylint \
        python-future \
        python-pygments \
@@ -33,6 +30,7 @@ pacman -Syu --noconfirm --needed \
        python-tqdm \
        python-jinja \
        python-dateutil \
+       python2-setuptools \
     || exit $?
 
 function aur_install {
@@ -57,6 +55,9 @@ aur_install intel-opencl-runtime ncurses5-compat-libs || exit $?
 
 aur_install zivid-telicam-driver || exit $?
 aur_install zivid || exit $?
+aur_install python-patch-ng || exit $?
+aur_install python-node-semver || exit $?
+aur_install python-pluginbase || exit $?
 aur_install conan || exit $?
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"

@@ -32,6 +32,10 @@ target_include_directories(${PROJECT_NAME}
             ${CMAKE_CURRENT_BINARY_DIR}/include/
 )
 
+include(/host/continuous-integration/linux/build/conanbuildinfo.cmake)
+conan_basic_setup()
+target_link_libraries(_zivid ${CONAN_LIBS})
+
 target_link_libraries(${PROJECT_NAME}
     PRIVATE Zivid::Core
             pybind11::module
