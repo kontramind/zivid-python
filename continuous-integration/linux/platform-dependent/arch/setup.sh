@@ -63,4 +63,4 @@ aur_install conan || exit $?
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 COMMON_SCRIPTS="$SCRIPT_DIR/../common"
 
-"$COMMON_SCRIPTS/install_eigen.sh" || exit $?
+# "$COMMON_SCRIPTS/install_eigen.sh" || exit $?

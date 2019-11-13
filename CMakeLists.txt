@@ -1,6 +1,16 @@
 cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
-project(zivid LANGUAGES CXX)
 
+
+
+include("HunterGate.cmake")
+HunterGate(
+    URL "https://github.com/ruslo/hunter/archive/v0.10.9.tar.gz"
+    SHA1 "53b198e364dc7bc8360fc545f798563229bd7e20"
+)
+hunter_add_package(Eigen)
+
+project(zivid LANGUAGES CXX)
+find_package(Eigen3 REQUIRED)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
