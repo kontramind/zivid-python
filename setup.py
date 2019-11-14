@@ -1,4 +1,6 @@
 from pkgutil import iter_modules
+import sys
+import subprocess
 
 # To be replaced by: from setuptools_scm import get_version
 def get_version():
@@ -37,6 +39,23 @@ def _check_dependency(module_name, package_hint=None):
         )
 
 
+def _run_process(args):
+    sys.stdout.flush()
+    try:
+        process = subprocess.Popen(args)
+        exit_code = process.wait()
+        if exit_code != 0:
+            raise RuntimeError("Wait failed with exit code {}".format(exit_code))
+    except Exception as ex:
+        raise type(ex)("Process failed: '{}'.".format(" ".join(args))) from ex
+    finally:
+        sys.stdout.flush()
+
+
+def _install_conan():
+    _run_process(("pip", "install", "conan"))
+
+
 def _main():
     # This list is a duplicate of the build-system requirements in pyproject.toml.
     # The purpose of these checks is to help users with PIP<19 lacking support for
@@ -45,6 +64,13 @@ def _main():
     _check_dependency("skbuild", "scikit-build")
     _check_dependency("cmake")
     _check_dependency("ninja")
+    print(
+        "all modules: {}".format([module[1] for module in iter_modules()]), flush=True
+    )
+    _install_conan()
+    print(
+        "all modules: {}".format([module[1] for module in iter_modules()]), flush=True
+    )
     _check_dependency("conan")
 
     from skbuild import setup
