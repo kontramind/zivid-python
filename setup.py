@@ -53,7 +53,7 @@ def _run_process(args):
 
 
 def _install_conan():
-    _run_process(("pip", "install", "conan"))
+    _run_process(("pip3", "install", "conan"))
 
 
 def _main():
