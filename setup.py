@@ -65,11 +65,13 @@ def _main():
     _check_dependency("cmake")
     _check_dependency("ninja")
     print(
-        "all modules: {}".format([module[1] for module in iter_modules()]), flush=True
+        "all modules: {}".format("\n".join([module[1] for module in iter_modules()])),
+        flush=True,
     )
     _install_conan()
     print(
-        "all modules: {}".format([module[1] for module in iter_modules()]), flush=True
+        "all modules: {}".format("\n".join([module[1] for module in iter_modules()])),
+        flush=True,
     )
     _check_dependency("conan")
 
