@@ -84,12 +84,12 @@ def three_frames_fixture(
         fram.release()
 
 
-@pytest.fixture(name="pose_file")
-def pose_file_fixture():
-    from pathlib import Path
-
-    return Path("/some/random/pose")  # TODO
-    # return or yield a pathlib.Path instance
+# @pytest.fixture(name="pose_file")
+# def pose_file_fixture():
+#     from pathlib import Path
+#
+#     return Path("/some/random/pose")  # TODO
+#     # return or yield a pathlib.Path instance
 
 
 # @pytest.fixture(name="poses")
@@ -104,16 +104,16 @@ def pose_file_fixture():
 #     )  # Todo: perhaps yield from temporary directory?
 
 
-@pytest.fixture(name="feature_points_and_poses")
-def feature_points_and_poses_fixture():
-    import zivid
-    import cv2
-
-    file = cv2.FileStorage(pose_file, cv2.FILE_STORAGE_READ)
-    pose_input = file.getNode("PoseState").mat().transpose()
-    # return zivid.handeye.Pose(
-    #    pose_input
-    # )  # Todo: perhaps yield from temporary directory?
+# @pytest.fixture(name="feature_points_and_poses")
+# def feature_points_and_poses_fixture():
+#     import zivid
+#     import cv2
+#
+#     file = cv2.FileStorage(pose_file, cv2.FILE_STORAGE_READ)
+#     pose_input = file.getNode("PoseState").mat().transpose()
+#     # return zivid.handeye.Pose(
+#     #    pose_input
+#     # )  # Todo: perhaps yield from temporary directory?
 
 
 #
