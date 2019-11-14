@@ -8,16 +8,16 @@ if [ $EUID != 0 ]; then
     exit $?
 fi
 
-conan install eigen/3.3.7@conan/stable || exit $?
-
-# conan profile new default --detect  || exit $? # Generates default profile detecting GCC and sets old ABI
-conan profile update settings.compiler.libcxx=libstdc++11 default  || exit $? # 
-
-[ -x build ] || mkdir -p build
-cd build || exit $? # 
-conan install .. || exit $? # 
-cd .. || exit $?
-conan create . conan/stable || exit $?
+# conan install eigen/3.3.7@conan/stable || exit $?
+# 
+# # conan profile new default --detect  || exit $? # Generates default profile detecting GCC and sets old ABI
+# conan profile update settings.compiler.libcxx=libstdc++11 default  || exit $? # 
+# 
+# [ -x build ] || mkdir -p build
+# cd build || exit $? # 
+# conan install .. || exit $? # 
+# cd .. || exit $?
+# conan create . conan/stable || exit $?
 
 
 #mkdir build && cd build && conan install .. || exit $?
@@ -52,3 +52,19 @@ conan create . conan/stable || exit $?
 #make install || exit $?
 #
 #cd "$ORIGINAL_DIR" || exit $?
+
+# echo "hello1"
+# git clone https://github.com/Microsoft/vcpkg.git || exit $?
+# echo "hello2"
+# cd vcpkg || exit $?
+# echo "hello3"
+# ./bootstrap-vcpkg.sh || exit $? ## got here
+# echo "hello4"
+# ./vcpkg integrate install || exit $? # got here
+# echo "hello5"
+# git --version || exit $?
+# echo "hello5.5"
+# ./vcpkg install eigen3 || exit $? # failed
+# echo "hello6"
+# cd - || exit $?
+# echo "hello7"

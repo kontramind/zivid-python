@@ -1,15 +1,29 @@
 cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
-
-
-
-include("HunterGate.cmake")
-HunterGate(
-    URL "https://github.com/ruslo/hunter/archive/v0.10.9.tar.gz"
-    SHA1 "53b198e364dc7bc8360fc545f798563229bd7e20"
-)
-hunter_add_package(Eigen)
-
 project(zivid LANGUAGES CXX)
+
+# Download automatically, you can also just copy the conan.cmake file
+if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
+   message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
+   file(DOWNLOAD "https://raw.githubusercontent.com/conan-io/cmake-conan/master/conan.cmake"
+                  "${CMAKE_BINARY_DIR}/conan.cmake")
+endif()
+
+include(${CMAKE_BINARY_DIR}/conan.cmake)
+
+message(INFO "CURRENT BIN DIR: ${CMAKE_BINARY_DIR}")
+
+conan_cmake_run(REQUIRES eigen/3.3.7@conan/stable
+                BASIC_SETUP)
+
+
+# include("HunterGate.cmake")
+# HunterGate(
+#     URL "https://github.com/ruslo/hunter/archive/v0.10.9.tar.gz"
+#     SHA1 "53b198e364dc7bc8360fc545f798563229bd7e20"
+# )
+# hunter_add_package(Eigen)
+
+
 find_package(Eigen3 REQUIRED)
 
 set(CMAKE_CXX_STANDARD 17)
