@@ -68,7 +68,7 @@ def _main():
         "all modules: {}".format("\n".join([module[1] for module in iter_modules()])),
         flush=True,
     )
-    _install_conan()
+    #_install_conan()
     print(
         "all modules: {}".format("\n".join([module[1] for module in iter_modules()])),
         flush=True,
