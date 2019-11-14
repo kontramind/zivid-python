@@ -35,9 +35,12 @@ namespace ZividPython::HandEye
     {
         using namespace Zivid::HandEye;
 
-        ZIVID_PYTHON_WRAP_CLASS(dest, Pose);
-        ZIVID_PYTHON_WRAP_CLASS(dest, CalibrationOutput);
-        ZIVID_PYTHON_WRAP_CLASS(dest, DetectionResult);
+        //ZIVID_PYTHON_WRAP_CLASS(dest, Pose);
+        ZIVID_PYTHON_WRAP_CLASS_TEST(dest, pose, Zivid::HandEye::Pose);
+        //ZIVID_PYTHON_WRAP_CLASS(dest, CalibrationOutput);
+        ZIVID_PYTHON_WRAP_CLASS_TEST(dest, CalibrationOutput, Zivid::HandEye::CalibrationOutput);
+        //ZIVID_PYTHON_WRAP_CLASS(dest, DetectionResult);
+        ZIVID_PYTHON_WRAP_CLASS_TEST(dest, DetectionResult, Zivid::HandEye::DetectionResult);
 
         dest.def("detect_feature_points", &Zivid::HandEye::detectFeaturePoints)
             .def("calibrate_eye_in_hand",

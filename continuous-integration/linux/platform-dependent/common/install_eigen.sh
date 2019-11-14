@@ -68,3 +68,4 @@ fi
 # echo "hello6"
 # cd - || exit $?
 # echo "hello7"
+pip install conan || exit $?
