@@ -10,6 +10,7 @@ nonPublicPythonFiles=$(comm -23 <(echo $pythonFiles| tr " " "\n" |sort) \
 
 bashFiles=$(find "$ROOT_DIR" -name '*.sh')
 
+pip install pip --upgrade || exit $?
 pip install "$ROOT_DIR" || exit $?
 pip install -r "$SCRIPT_DIR/../requirements-lint.txt" || exit $?
 
