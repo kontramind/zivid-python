@@ -27,8 +27,6 @@ echo Running public pylint on:
 echo "$publicPythonFiles"
 pylint \
     --rcfile "$ROOT_DIR/.pylintrc-packaged-files" \
-    --extension-pkg-whitelist=cv2 \
-    --generated-members=_zivid.* \
     $publicPythonFiles \
     || exit $?
 
