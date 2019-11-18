@@ -14,6 +14,6 @@ namespace ZividPython::Conversion
     template<typename T, size_t rows, size_t cols>
     auto toPy(const Zivid::Matrix<T, rows, cols> &source)
     {
-        return Eigen::Matrix<T, rows, cols>{ source.cbegin() };
+        return Eigen::Matrix<T, rows, cols>{ &(source(0,0)) };
     }
 } // namespace ZividPython::Conversion
