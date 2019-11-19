@@ -45,9 +45,9 @@ namespace ZividPython::HandEye
         ZIVID_PYTHON_WRAP_CLASS_TEST(dest, DetectionResult, Zivid::HandEye::DetectionResult);
         
 
-        dest;//.def("detect_feature_points", [](const ReleasablePointCloud &releasablePointCloud) {
-            //         return Zivid::HandEye::detectFeaturePoints(releasablePointCloud.impl());
-            //     });
+        dest.def("detect_feature_points", [](const ReleasablePointCloud &releasablePointCloud) {
+                    return Zivid::HandEye::detectFeaturePoints(releasablePointCloud.impl());
+                });
             //.def("calibrate_eye_in_hand",
             //     [](const PyCalibrationInputs &pyInputs) {
             //         return Zivid::HandEye::calibrateEyeInHand(transform(pyInputs));

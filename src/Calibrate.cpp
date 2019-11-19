@@ -21,6 +21,6 @@ namespace ZividPython
 
     void wrapClass(pybind11::class_<Zivid::HandEye::CalibrationInput> pyClass)
     {
-        pyClass;
+        pyClass; // py::init<size_t, size_t>()
     }
 } // namespace ZividPython

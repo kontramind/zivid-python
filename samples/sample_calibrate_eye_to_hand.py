@@ -87,9 +87,11 @@ def _main():
 
                 result = zivid.handeye.detect_feature_points(frame.get_point_cloud())
                 print(result)
+                print(type(result))
                 if result:
                     print("OK")
-                    calibration_input.append((robot_pose, result))
+                    res = zivid.handeye.CalibrationInput(robot_pose, result)
+                    calibration_input.append((robot_pose, res))
                     current_pose_id += 1
                 else:
                     print("FAILED")
