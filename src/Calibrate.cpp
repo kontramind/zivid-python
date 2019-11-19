@@ -18,4 +18,9 @@ namespace ZividPython
                  })
             .def("perPoseCalibrationResiduals", &Zivid::HandEye::CalibrationOutput::perPoseCalibrationResiduals);
     }
+
+    void wrapClass(pybind11::class_<Zivid::HandEye::CalibrationInput> pyClass)
+    {
+        pyClass;
+    }
 } // namespace ZividPython
