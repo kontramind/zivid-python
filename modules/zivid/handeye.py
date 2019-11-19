@@ -41,7 +41,7 @@ class DetectionResult:  # pylint: disable=too-few-public-methods
 
 class CalibrationInput:
     def __init__(self, pose, detected_features):
-        self.__impl = _zivid.handeye.CalibrationInput(pose, detected_features)
+        self.__impl = _zivid.handeye.CalibrationInput(pose._Pose__impl, detected_features._DetectionResult__impl)
 
     def __str__(self):
         return self.__impl.to_string()
