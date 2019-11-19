@@ -7,6 +7,7 @@
 #include <ZividPython/Detector.h>
 #include <ZividPython/Pose.h>
 #include <ZividPython/Wrappers.h>
+#include <ZividPython/ReleasablePointCloud.h>
 
 #include <pybind11/pybind11.h>
 
@@ -36,13 +37,15 @@ namespace ZividPython::HandEye
         using namespace Zivid::HandEye;
 
         //ZIVID_PYTHON_WRAP_CLASS(dest, Pose);
-        ZIVID_PYTHON_WRAP_CLASS_TEST(dest, pose, Zivid::HandEye::Pose);
+        ZIVID_PYTHON_WRAP_CLASS_TEST(dest, Pose, Zivid::HandEye::Pose);
         //ZIVID_PYTHON_WRAP_CLASS(dest, CalibrationOutput);
         ZIVID_PYTHON_WRAP_CLASS_TEST(dest, CalibrationOutput, Zivid::HandEye::CalibrationOutput);
         //ZIVID_PYTHON_WRAP_CLASS(dest, DetectionResult);
         ZIVID_PYTHON_WRAP_CLASS_TEST(dest, DetectionResult, Zivid::HandEye::DetectionResult);
 
-        dest.def("detect_feature_points", &Zivid::HandEye::detectFeaturePoints)
+        dest.def("detect_feature_points", [](const ReleasablePointCloud &releasablePointCloud) {
+                     return Zivid::HandEye::detectFeaturePoints(releasablePointCloud.impl());
+                 })
             .def("calibrate_eye_in_hand",
                  [](const PyCalibrationInputs &pyInputs) {
                      return Zivid::HandEye::calibrateEyeInHand(transform(pyInputs));
