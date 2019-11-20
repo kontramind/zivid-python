@@ -13,8 +13,6 @@ namespace ZividPython::HandEye
 {
     void wrapClass(pybind11::class_<Zivid::HandEye::CheckerboardDetector> pyClass)
     {
-        pyClass
-          .def(py::init<size_t, size_t>())
-          .def("detect", &Zivid::HandEye::CheckerboardDetector::detect);
+        pyClass.def(py::init<size_t, size_t>()).def("detect", &Zivid::HandEye::CheckerboardDetector::detect);
     }
 } // namespace ZividPython::HandEye

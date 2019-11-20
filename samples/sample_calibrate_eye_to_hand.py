@@ -57,7 +57,7 @@ def _main():
                     current_pose_id += 1
                 else:
                     print("FAILED")
-            except Exception as ex:
+            except ValueError as ex:
                 print(ex)
         elif command == "c":
             calibrate = True
