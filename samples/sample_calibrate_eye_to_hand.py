@@ -35,9 +35,10 @@
 #     _main()
 
 
-import zivid.handeye
 import datetime
+
 import numpy as np
+import zivid.handeye
 
 
 def acquire_checkerboard_frame(camera):
@@ -59,7 +60,7 @@ def enter_robot_pose(index):
     )
     print(inputted)
     elements = inputted.split(maxsplit=15)
-    data = np.array(elements, dtype=np.float64).reshape((4, 4))
+    data = np.array(elements, dtype=np.float64).reshape((4, 4)).transpose()
     robot_pose = zivid.handeye.Pose(data)
     print("The following pose was entered:\n{}".format(robot_pose))
     return robot_pose
