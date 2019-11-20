@@ -47,7 +47,10 @@ namespace ZividPython::HandEye
 
         dest.def("detect_feature_points", [](const ReleasablePointCloud &releasablePointCloud) {
                     return Zivid::HandEye::detectFeaturePoints(releasablePointCloud.impl());
-                });
+                })
+                .def("calibrate_eye_to_hand", [](const std::vector<CalibrationInput> &calibrationInputs) {
+                    return Zivid::HandEye::calibrateEyeToHand(calibrationInputs);
+            });
             //.def("calibrate_eye_in_hand",
             //     [](const PyCalibrationInputs &pyInputs) {
             //         return Zivid::HandEye::calibrateEyeInHand(transform(pyInputs));

@@ -70,7 +70,7 @@ def _main():
     camera = app.connect_camera()
 
     current_pose_id = 0
-    calibration_input = list()
+    calibration_inputs = list()
     calibrate = False
 
     while not calibrate:
@@ -91,7 +91,8 @@ def _main():
                 if result:
                     print("OK")
                     res = zivid.handeye.CalibrationInput(robot_pose, result)
-                    calibration_input.append((robot_pose, res))
+                    # calibration_inputs.append((robot_pose, res))
+                    calibration_inputs.append(res)
                     current_pose_id += 1
                 else:
                     print("FAILED")
@@ -104,7 +105,7 @@ def _main():
             print("Unknown command '{}'".format(command))
 
     print("Performing hand-eye calibration...")
-    calibration_result = zivid.handeye.calibrate_eye_to_hand(calibration_input)
+    calibration_result = zivid.handeye.calibrate_eye_to_hand(calibration_inputs)
     if calibration_result:
         print("OK")
         print("Result:\n{}".format(calibration_result))
