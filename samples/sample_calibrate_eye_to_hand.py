@@ -1,47 +1,11 @@
-# """Capture sample."""
-# import sys
-# import cv2
-# import zivid
-#
-#
-# def _load_pose(index):
-#     file_name = f"/home/mathias/Downloads/martin_eth/pos{index+1:02}.yaml"
-#     print(f"Loading: {file_name}")
-#     pose_file = cv2.FileStorage(file_name, cv2.FILE_STORAGE_READ)
-#     return zivid.handeye.Pose(pose_file.getNode("PoseState").mat().transpose())
-#
-#
-# def _load_frame(index):
-#     file_name = f"/home/mathias/Downloads/martin_eth/img{index+1:02}.zdf"
-#     print(f"Loading: {file_name}")
-#     return zivid.handeye.detect_feature_points(zivid.Frame(file_name).get_point_cloud())
-#
-#
-# def _get_input(index):
-#     return (_load_pose(index), _load_frame(index))
-#
-#
-# def _main():
-#     app = zivid.Application()  # pylint: disable=unused-variable
-#
-#     calibration = zivid.handeye.calibrate_eye_to_hand(
-#         list(_get_input(i) for i in range(int(sys.argv[1])))
-#     )
-#
-#     print(calibration)
-#
-#
-# if __name__ == "__main__":
-#     _main()
-
-
+"""Hand-eye calibration sample."""
 import datetime
 
 import numpy as np
 import zivid.handeye
 
 
-def acquire_checkerboard_frame(camera):
+def _acquire_checkerboard_frame(camera):
     print("Capturing checkerboard image... ")
     with camera.update_settings() as updater:
         updater.settings.iris = 17
@@ -52,13 +16,12 @@ def acquire_checkerboard_frame(camera):
     return camera.capture()
 
 
-def enter_robot_pose(index):
+def _enter_robot_pose(index):
     inputted = input(
         "Enter pose with id={} (a line with 16 space separated values describing 4x4 row-major matrix):".format(
             index
         )
     )
-    print(inputted)
     elements = inputted.split(maxsplit=15)
     data = np.array(elements, dtype=np.float64).reshape((4, 4)).transpose()
     robot_pose = zivid.handeye.Pose(data)
@@ -80,26 +43,22 @@ def _main():
         ).strip()
         if command == "p":
             try:
-                robot_pose = enter_robot_pose(current_pose_id)
+                robot_pose = _enter_robot_pose(current_pose_id)
 
-                frame = acquire_checkerboard_frame(camera)
+                frame = _acquire_checkerboard_frame(camera)
 
                 print("Detecting checkerboard square centers... ")
-
                 result = zivid.handeye.detect_feature_points(frame.get_point_cloud())
-                print(result)
-                print(type(result))
+
                 if result:
                     print("OK")
                     res = zivid.handeye.CalibrationInput(robot_pose, result)
-                    # calibration_inputs.append((robot_pose, res))
                     calibration_inputs.append(res)
                     current_pose_id += 1
                 else:
                     print("FAILED")
             except Exception as ex:
-                # print(ex)
-                raise ex
+                print(ex)
         elif command == "c":
             calibrate = True
         else:

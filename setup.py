@@ -60,7 +60,7 @@ def _main():
         license="BSD 3-Clause",
         packages=["zivid", "_zivid"],
         package_dir={"": "modules"},
-        install_requires=["numpy", "conan"],
+        install_requires=["numpy"],
         cmake_args=[
             "-DZIVID_PYTHON_VERSION=" + _zivid_python_version(),
             "-DZIVID_SDK_VERSION=" + _zivid_sdk_version(),

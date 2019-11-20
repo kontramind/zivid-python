@@ -57,8 +57,8 @@ namespace ZividPython
     ZividPython::wrapClass<Zivid::name, ZividPython::WrapType::normal>(                                                \
         dest, static_cast<void (*)(pybind11::class_<Zivid::name>)>(ZividPython::wrapClass), #name)
 
-#define ZIVID_PYTHON_WRAP_CLASS_TEST(dest, name, full_path)                                                                            \
-    ZividPython::wrapClass<full_path, ZividPython::WrapType::normal>(                                                \
+#define ZIVID_PYTHON_WRAP_CLASS_FULLPATH(dest, name, full_path)                                                        \
+    ZividPython::wrapClass<full_path, ZividPython::WrapType::normal>(                                                  \
         dest, static_cast<void (*)(pybind11::class_<full_path>)>(ZividPython::wrapClass), #name)
 
 
