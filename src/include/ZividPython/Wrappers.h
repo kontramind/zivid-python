@@ -61,7 +61,6 @@ namespace ZividPython
     ZividPython::wrapClass<full_path, ZividPython::WrapType::normal>(                                                  \
         dest, static_cast<void (*)(pybind11::class_<full_path>)>(ZividPython::wrapClass), #name)
 
-
 #define ZIVID_PYTHON_WRAP_CLASS_AS_RELEASABLE(dest, name)                                                              \
     ZividPython::wrapClass<ZividPython::Releasable##name, ZividPython::WrapType::releasable>(                          \
         dest, static_cast<void (*)(pybind11::class_<ZividPython::Releasable##name>)>(ZividPython::wrapClass), #name)
