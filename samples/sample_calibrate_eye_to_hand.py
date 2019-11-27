@@ -1,5 +1,6 @@
 """Hand-eye calibration sample."""
 import datetime
+import code
 
 import numpy as np
 import zivid.handeye
@@ -66,6 +67,7 @@ def _main():
 
     print("Performing hand-eye calibration...")
     calibration_result = zivid.handeye.calibrate_eye_to_hand(calibration_inputs)
+    code.interact(local=locals())
     if calibration_result:
         print("OK")
         print("Result:\n{}".format(calibration_result))

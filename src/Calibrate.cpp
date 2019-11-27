@@ -1,9 +1,11 @@
 #include <Zivid/HandEye/Calibrate.h>
 
 #include <ZividPython/Calibrate.h>
+#include <ZividPython/CalibrationResidual.h>
 #include <ZividPython/Matrix.h>
 
 #include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
 
 namespace py = pybind11;
 

@@ -37,11 +37,13 @@ def calibrate_eye_in_hand(calibration_inputs):
         Instance of CalibrationOutput
 
     """
-    return _zivid.handeye.calibrate_eye_in_hand(
-        [
-            calib._CalibrationInput__impl  # pylint: disable=protected-access
-            for calib in calibration_inputs
-        ]
+    return CalibrationOutput(
+        _zivid.handeye.calibrate_eye_in_hand(
+            [
+                calib._CalibrationInput__impl  # pylint: disable=protected-access
+                for calib in calibration_inputs
+            ]
+        )
     )
 
 
@@ -60,11 +62,13 @@ def calibrate_eye_to_hand(calibration_inputs):
         Instance of CalibrationOutput
 
     """
-    return _zivid.handeye.calibrate_eye_to_hand(
-        [
-            calib._CalibrationInput__impl  # pylint: disable=protected-access
-            for calib in calibration_inputs
-        ]
+    return CalibrationOutput(
+        _zivid.handeye.calibrate_eye_to_hand(
+            [
+                calib._CalibrationInput__impl  # pylint: disable=protected-access
+                for calib in calibration_inputs
+            ]
+        )
     )
 
 
@@ -120,6 +124,101 @@ class CalibrationInput:  # pylint: disable=too-few-public-methods
             pose._Pose__impl,  # pylint: disable=protected-access
             detected_features._DetectionResult__impl,  # pylint: disable=protected-access
         )
+
+    def __str__(self):
+        return self.__impl.to_string()
+
+
+class CalibrationOutput:
+    """The calibration result containing the computed pose and reprojection errors for all the input poses."""
+
+    def __init__(self, internal_calibration_result):
+        """Calibration results containing the computed pose and reprojection errors for all the input poses.
+
+        Args:
+            internal_calibration_result: An internal zivid calibration result instance
+
+        """
+        self.__impl = internal_calibration_result
+
+    @property
+    def per_pose_calibration_residuals(self):
+        """Return the calibration residuals.
+
+        Feature points (for each input pose) are transformed into a common frame.
+        A rigid transform between feature points and corresponding centroids are utilized to
+        compute residuals for rotational and translational parts. An exception is thrown if the result is not valid.
+
+        Returns:
+            a list of calibration residuals
+
+        """
+        return [
+            CalibrationResidual(element)
+            for element in self.__impl.perPoseCalibrationResiduals()
+        ]
+
+    @property
+    def hand_eye_transform(self):
+        """Hand-eye transform.
+
+        A 4x4 matrix describing hand-eye calibration transform (either eye-in-hand or eye-to-hand).
+        An exception is thrown if the result is not valid.
+
+        Returns:
+            A 4x4 numpy matrix
+
+        """
+        return self.__impl.handEyeTransform()
+
+    @property
+    def valid(self):
+        """Test if CalibrationOutput is valid.
+
+        Returns:
+            a bool
+
+        """
+        return self.__impl.valid()
+
+    def __bool__(self):
+        return self.valid
+
+    def __str__(self):
+        return self.__impl.to_string()
+
+
+class CalibrationResidual:
+    """Binds together rotational and translational residual errors wrt. calibration transform."""
+
+    def __init__(self, internal_calibration_residual):
+        """Binds together rotational and translational residual errors wrt. calibration transform.
+
+        Args:
+            internal_calibration_residual: an internal calibration residual instance
+
+        """
+        self.__impl = internal_calibration_residual
+
+    @property
+    def rotation(self):
+        """Component of calibration residual.
+
+        Returns:
+            Rotational residual in degrees.
+
+        """
+        return self.__impl.rotation()
+
+    @property
+    def translation(self):
+        """Component of calibration residual.
+
+        Returns:
+             Translational residual in millimeters.
+
+        """
+        return self.__impl.translation()
 
     def __str__(self):
         return self.__impl.to_string()

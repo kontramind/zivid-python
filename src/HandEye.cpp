@@ -4,6 +4,7 @@
 #include <Zivid/PointCloud.h>
 
 #include <ZividPython/Calibrate.h>
+#include <ZividPython/CalibrationResidual.h>
 #include <ZividPython/Detector.h>
 #include <ZividPython/Pose.h>
 #include <ZividPython/ReleasablePointCloud.h>
@@ -23,6 +24,7 @@ namespace ZividPython::HandEye
         ZIVID_PYTHON_WRAP_CLASS_FULLPATH(dest, CalibrationOutput, Zivid::HandEye::CalibrationOutput);
         ZIVID_PYTHON_WRAP_CLASS_FULLPATH(dest, CalibrationInput, Zivid::HandEye::CalibrationInput);
         ZIVID_PYTHON_WRAP_CLASS_FULLPATH(dest, DetectionResult, Zivid::HandEye::DetectionResult);
+        ZIVID_PYTHON_WRAP_CLASS_FULLPATH(dest, CalibrationResidual, Zivid::HandEye::CalibrationResidual);
 
         dest.def("detect_feature_points",
                  [](const ReleasablePointCloud &releasablePointCloud) {
