@@ -28,6 +28,10 @@ namespace ZividPython::HandEye
                  [](const ReleasablePointCloud &releasablePointCloud) {
                      return Zivid::HandEye::detectFeaturePoints(releasablePointCloud.impl());
                  })
+            .def("calibrate_eye_in_hand",
+                 [](const std::vector<CalibrationInput> &calibrationInputs) {
+                     return Zivid::HandEye::calibrateEyeInHand(calibrationInputs);
+                 })
             .def("calibrate_eye_to_hand", [](const std::vector<CalibrationInput> &calibrationInputs) {
                 return Zivid::HandEye::calibrateEyeToHand(calibrationInputs);
             });
