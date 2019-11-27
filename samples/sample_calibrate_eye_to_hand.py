@@ -23,7 +23,7 @@ def _enter_robot_pose(index):
         )
     )
     elements = inputted.split(maxsplit=15)
-    data = np.array(elements, dtype=np.float64).reshape((4, 4)).transpose()
+    data = np.array(elements, dtype=np.float64).reshape((4, 4))
     robot_pose = zivid.handeye.Pose(data)
     print("The following pose was entered:\n{}".format(robot_pose))
     return robot_pose

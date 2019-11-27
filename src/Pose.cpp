@@ -9,7 +9,7 @@ namespace ZividPython
 {
     void wrapClass(pybind11::class_<Zivid::HandEye::Pose> pyClass)
     {
-        pyClass.def(py::init([](const Eigen::Matrix4d &matrix) {
+        pyClass.def(py::init([](const Eigen::Matrix<double, 4, 4, Eigen::RowMajor> &matrix) {
             return std::make_unique<Zivid::HandEye::Pose>(Conversion::toCpp(matrix));
         }));
     }
