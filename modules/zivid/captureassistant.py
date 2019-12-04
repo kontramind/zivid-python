@@ -34,7 +34,9 @@ class SuggestSettingsParameters:  # pylint: disable=too-few-public-methods
 
         """
         if ambient_light_frequency is None:
-            self.__impl = _zivid.captureassistant.SuggestSettingsParameters(max_capture_time)
+            self.__impl = _zivid.captureassistant.SuggestSettingsParameters(
+                max_capture_time
+            )
         else:
             self.__impl = _zivid.captureassistant.SuggestSettingsParameters(
                 max_capture_time, ambient_light_frequency.value
