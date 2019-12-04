@@ -5,15 +5,11 @@ import _zivid
 import zivid._settings_converter as _settings_converter
 
 
-class AmbientLightFrequency(Enum):  # pylint: disable=too-few-public-methods
-    """Ensure compatibility with the frequency of the ambient light in the scene."""
+_AmbientLightFrequencyEntries = {entry: entry for entry in _zivid.capture_assistant.AmbientLightFrequency.__entries}
+_AmbientLightFrequencyToInternalMap = {entry: getattr(_zivid.capture_assistant.AmbientLightFrequency, entry) for entry in _AmbientLightFrequencyEntries}
 
-    hz50 = _zivid.capture_assistant.AmbientLightFrequency.hz50
-    hz60 = _zivid.capture_assistant.AmbientLightFrequency.hz60
-    none = _zivid.capture_assistant.AmbientLightFrequency.none
-
-    def __str__(self):
-        return str(self.name)
+AmbientLightFrequency = Enum('AmbientLightFrequency', _AmbientLightFrequencyEntries)
+setattr(AmbientLightFrequency, '__str__', lambda self: str(self.name))
 
 
 class SuggestSettingsParameters:  # pylint: disable=too-few-public-methods
@@ -30,7 +26,7 @@ class SuggestSettingsParameters:  # pylint: disable=too-few-public-methods
 
         Args:
             max_capture_time: an instance of datetime.timedelta
-            ambient_light_frequency: an instance of zivid.capture_assistant.AmbientLightFrequency
+            ambient_light_frequency: a member of the enum zivid.capture_assistant.AmbientLightFrequency
 
         """
         if ambient_light_frequency is None:
@@ -39,7 +35,7 @@ class SuggestSettingsParameters:  # pylint: disable=too-few-public-methods
             )
         else:
             self.__impl = _zivid.capture_assistant.SuggestSettingsParameters(
-                max_capture_time, ambient_light_frequency.value
+                max_capture_time, _AmbientLightFrequencyToInternalMap[ambient_light_frequency.name]
             )
 
     @property
@@ -60,7 +56,7 @@ class SuggestSettingsParameters:  # pylint: disable=too-few-public-methods
             Instance of AmbientLightFrequency
 
         """
-        return AmbientLightFrequency(self.__impl.ambientLightFrequency())
+        return AmbientLightFrequency(self.__impl.ambientLightFrequency().value)
 
     def __str__(self):
         return self.__impl.to_string()
