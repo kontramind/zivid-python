@@ -25,24 +25,24 @@ class SuggestSettingsParameters:  # pylint: disable=too-few-public-methods
 
     """
 
-    def __init__(self, budget, frequency=None):
+    def __init__(self, max_capture_time, ambient_light_frequency=None):
         """Initialize SuggestSettingsParameters.
 
         Args:
-            budget: max capture time
-            frequency: ambient light frequency
+            max_capture_time: an instance of datetime.timedelta
+            ambient_light_frequency: an instance of zivid.captureassistant.AmbientLightFrequency
 
         """
-        if frequency is None:
-            self.__impl = _zivid.captureassistant.SuggestSettingsParameters(budget)
+        if ambient_light_frequency is None:
+            self.__impl = _zivid.captureassistant.SuggestSettingsParameters(max_capture_time)
         else:
             self.__impl = _zivid.captureassistant.SuggestSettingsParameters(
-                budget, frequency.value
+                max_capture_time, ambient_light_frequency.value
             )
 
     @property
     def max_capture_time(self):
-        """Get capture-time budget.
+        """Get max capture time.
 
         Returns:
             Instance of datetime.timedelta
@@ -70,9 +70,9 @@ def suggest_settings(camera, suggest_settings_parameters):
     The suggested settings returned from this function should be passed into hdr.capture to perform the actual capture.
 
     Args:
-        camera: reference to Camera instances
-        suggest_settings_parameters: provides parameters (e.g., max capture time constraint)
-                                     to the suggest_settings algorithm.
+        camera: an instance of zivid.Camera
+        suggest_settings_parameters: an instance of zivid.captureassistant.SuggestSettingsParameters which provides
+                                     parameters (e.g., max capture time constraint) to the suggest_settings algorithm.
 
     Returns:
         List of Settings.
