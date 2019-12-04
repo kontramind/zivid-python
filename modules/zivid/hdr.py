@@ -28,8 +28,8 @@ def capture(camera, settings_list):
     """Capture and merge frames.
 
     Args:
-        camera: a reference to camera instance
-        settings_list: a list of camera settings
+        camera: an instance of zivid.Camera
+        settings_list: a list of zivid.Settings instances
 
     Returns:
         a single frame (when single setting given) or high dynamic range frame (when multiple settings given)
