@@ -17,8 +17,8 @@ def _main():
         camera, suggest_settings_parameters
     )
 
-    frame = zivid.hdr.capture(camera, suggested_settings)
-    frame.save("result.zdf")
+    with zivid.hdr.capture(camera, suggested_settings) as hdr_frame:
+        hdr_frame.save("result.zdf")
 
 
 if __name__ == "__main__":

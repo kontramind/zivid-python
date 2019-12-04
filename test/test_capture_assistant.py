@@ -11,7 +11,7 @@ def test_ambient_light_frequency():
 
 
 def test_suggest_settings_parameters():
-    from zivid.captur_eassistant import AmbientLightFrequency, SuggestSettingsParameters
+    from zivid.capture_assistant import AmbientLightFrequency, SuggestSettingsParameters
 
     suggest_settings_parameters = SuggestSettingsParameters(
         max_capture_time=datetime.timedelta(milliseconds=1200),
