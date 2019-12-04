@@ -5,8 +5,10 @@ import _zivid
 import zivid._settings_converter as _settings_converter
 
 
-_AmbientLightFrequencyEntries = {entry: entry for entry in _zivid.capture_assistant.AmbientLightFrequency.__entries}
-_AmbientLightFrequencyToInternalMap = {entry: getattr(_zivid.capture_assistant.AmbientLightFrequency, entry) for entry in _AmbientLightFrequencyEntries}
+_AmbientLightFrequencyEntries = {entry: entry   # pylint: disable=invalid-name
+                                 for entry in _zivid.capture_assistant.AmbientLightFrequency.__entries}
+_AmbientLightFrequencyToInternalMap = {entry: getattr(_zivid.capture_assistant.AmbientLightFrequency, entry)   # pylint: disable=invalid-name
+                                       for entry in _AmbientLightFrequencyEntries}
 
 AmbientLightFrequency = Enum('AmbientLightFrequency', _AmbientLightFrequencyEntries)
 setattr(AmbientLightFrequency, '__str__', lambda self: str(self.name))
@@ -56,7 +58,7 @@ class SuggestSettingsParameters:  # pylint: disable=too-few-public-methods
             Instance of AmbientLightFrequency
 
         """
-        return AmbientLightFrequency(self.__impl.ambientLightFrequency().value)
+        return AmbientLightFrequency(self.__impl.ambientLightFrequency().name)
 
     def __str__(self):
         return self.__impl.to_string()
