@@ -2,7 +2,7 @@
 
 #include <ZividPython/Wrappers.h>
 
-namespace ZividPython::CaptureAssistant
+namespace ZividPython::Capture_Assistant
 {
     void wrapAsSubmodule(pybind11::module &dest);
-} // namespace ZividPython::CaptureAssistant
+} // namespace ZividPython::Capture_Assistant

@@ -1,4 +1,4 @@
-#include <ZividPython/CaptureAssistant.h>
+#include <ZividPython/Capture_Assistant.h>
 #include <ZividPython/SuggestSettingsParameters.h>
 
 #include <pybind11/pybind11.h>
@@ -14,10 +14,11 @@ namespace ZividPython
                      return std::make_unique<Zivid::CaptureAssistant::SuggestSettingsParameters>(max_capture_time);
                  }),
                  py::arg("max_capture_time"))
-            .def(py::init(
-                     [](std::chrono::milliseconds &max_capture_time, Zivid::CaptureAssistant::AmbientLightFrequency &ambient_light_frequency) {
-                         return std::make_unique<Zivid::CaptureAssistant::SuggestSettingsParameters>(max_capture_time, ambient_light_frequency);
-                     }),
+            .def(py::init([](std::chrono::milliseconds &max_capture_time,
+                             Zivid::CaptureAssistant::AmbientLightFrequency &ambient_light_frequency) {
+                     return std::make_unique<Zivid::CaptureAssistant::SuggestSettingsParameters>(
+                         max_capture_time, ambient_light_frequency);
+                 }),
                  py::arg("max_capture_time"),
                  py::arg("ambient_light_frequency"))
             .def("maxCaptureTime", &Zivid::CaptureAssistant::SuggestSettingsParameters::maxCaptureTime)

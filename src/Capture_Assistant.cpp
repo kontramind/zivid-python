@@ -1,7 +1,7 @@
 #include <Zivid/CaptureAssistant.h>
 
 #include <ZividPython/AmbientLightFrequency.h>
-#include <ZividPython/CaptureAssistant.h>
+#include <ZividPython/Capture_Assistant.h>
 #include <ZividPython/ReleasableCamera.h>
 #include <ZividPython/SuggestSettingsParameters.h>
 #include <ZividPython/Wrappers.h>
@@ -11,7 +11,7 @@
 #include <chrono>
 #include <vector>
 
-namespace ZividPython::CaptureAssistant
+namespace ZividPython::Capture_Assistant
 {
     void wrapAsSubmodule(pybind11::module &dest)
     {
@@ -26,4 +26,4 @@ namespace ZividPython::CaptureAssistant
                      return Zivid::CaptureAssistant::suggestSettings(camera.impl(), suggestSettingsParameters);
                  });
     }
-} // namespace ZividPython::CaptureAssistant
+} // namespace ZividPython::Capture_Assistant

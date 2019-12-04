@@ -8,7 +8,7 @@ try:
         environment,
         firmware,
         handeye,
-        captureassistant,
+        capture_assistant,
         Frame,
         FrameInfo,
         hdr,
