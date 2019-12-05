@@ -5,12 +5,12 @@ import _zivid
 import zivid._settings_converter as _settings_converter
 
 
-_AmbientLightFrequencyEntries = {entry: entry   # pylint: disable=invalid-name
-                                 for entry in _zivid.capture_assistant.AmbientLightFrequency.__entries}
-_AmbientLightFrequencyToInternalMap = {entry: getattr(_zivid.capture_assistant.AmbientLightFrequency, entry)   # pylint: disable=invalid-name
+_AmbientLightFrequencyEntries = {entry: entry  # pylint: disable=invalid-name
+                                 for entry in _zivid.capture_assistant.AmbientLightFrequency.__entries}  # pylint: disable=protected-access
+_AmbientLightFrequencyToInternalMap = {entry: getattr(_zivid.capture_assistant.AmbientLightFrequency, entry)  # pylint: disable=invalid-name
                                        for entry in _AmbientLightFrequencyEntries}
 
-AmbientLightFrequency = Enum('AmbientLightFrequency', _AmbientLightFrequencyEntries)
+AmbientLightFrequency = Enum('AmbientLightFrequency', _AmbientLightFrequencyEntries)  # pylint: disable=invalid-name
 setattr(AmbientLightFrequency, '__str__', lambda self: str(self.name))
 
 
