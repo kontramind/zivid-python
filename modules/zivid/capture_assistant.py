@@ -5,13 +5,20 @@ import _zivid
 import zivid._settings_converter as _settings_converter
 
 
-_AmbientLightFrequencyEntries = {entry: entry  # pylint: disable=invalid-name
-                                 for entry in _zivid.capture_assistant.AmbientLightFrequency.__entries}  # pylint: disable=protected-access
-_AmbientLightFrequencyToInternalMap = {entry: getattr(_zivid.capture_assistant.AmbientLightFrequency, entry)  # pylint: disable=invalid-name
-                                       for entry in _AmbientLightFrequencyEntries}
-
-AmbientLightFrequency = Enum('AmbientLightFrequency', _AmbientLightFrequencyEntries)  # pylint: disable=invalid-name
-setattr(AmbientLightFrequency, '__str__', lambda self: str(self.name))
+_AmbientLightFrequencyEntries = {  # pylint: disable=invalid-name
+    entry: entry
+    for entry in _zivid.capture_assistant.AmbientLightFrequency.__entries  # pylint: disable=protected-access
+}
+_AmbientLightFrequencyToInternalMap = {  # pylint: disable=invalid-name
+    entry: getattr(
+        _zivid.capture_assistant.AmbientLightFrequency, entry
+    )
+    for entry in _AmbientLightFrequencyEntries
+}
+AmbientLightFrequency = Enum(  # pylint: disable=invalid-name
+    "AmbientLightFrequency", _AmbientLightFrequencyEntries
+)
+setattr(AmbientLightFrequency, "__str__", lambda self: str(self.name))
 
 
 class SuggestSettingsParameters:  # pylint: disable=too-few-public-methods
@@ -37,7 +44,8 @@ class SuggestSettingsParameters:  # pylint: disable=too-few-public-methods
             )
         else:
             self.__impl = _zivid.capture_assistant.SuggestSettingsParameters(
-                max_capture_time, _AmbientLightFrequencyToInternalMap[ambient_light_frequency.name]
+                max_capture_time,
+                _AmbientLightFrequencyToInternalMap[ambient_light_frequency.name],
             )
 
     @property
