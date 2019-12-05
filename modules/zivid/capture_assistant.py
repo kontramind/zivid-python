@@ -10,9 +10,7 @@ _AmbientLightFrequencyEntries = {  # pylint: disable=invalid-name
     for entry in _zivid.capture_assistant.AmbientLightFrequency.__entries  # pylint: disable=protected-access
 }
 _AmbientLightFrequencyToInternalMap = {  # pylint: disable=invalid-name
-    entry: getattr(
-        _zivid.capture_assistant.AmbientLightFrequency, entry
-    )
+    entry: getattr(_zivid.capture_assistant.AmbientLightFrequency, entry)
     for entry in _AmbientLightFrequencyEntries
 }
 AmbientLightFrequency = Enum(  # pylint: disable=invalid-name
