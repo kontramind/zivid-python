@@ -17,7 +17,8 @@ AmbientLightFrequency = Enum(  # pylint: disable=invalid-name
     "AmbientLightFrequency", _AmbientLightFrequencyEntries
 )
 setattr(AmbientLightFrequency, "__str__", lambda self: str(self.name))
-setattr(AmbientLightFrequency, "__doc__", "\"\"\"Ensure compatibility with the frequency of the ambient light in the scene.\"\"\"")
+setattr(AmbientLightFrequency, "__doc__",
+        "\"\"\"Ensure compatibility with the frequency of the ambient light in the scene.\"\"\"")
 
 
 class SuggestSettingsParameters:  # pylint: disable=too-few-public-methods
