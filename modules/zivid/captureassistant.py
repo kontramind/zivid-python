@@ -7,10 +7,10 @@ import zivid._settings_converter as _settings_converter
 
 _AmbientLightFrequencyEntries = {  # pylint: disable=invalid-name
     entry: entry
-    for entry in _zivid.capture_assistant.AmbientLightFrequency.__entries  # pylint: disable=protected-access
+    for entry in _zivid.captureassistant.AmbientLightFrequency.__entries  # pylint: disable=protected-access
 }
 _AmbientLightFrequencyToInternalMap = {  # pylint: disable=invalid-name
-    entry: getattr(_zivid.capture_assistant.AmbientLightFrequency, entry)
+    entry: getattr(_zivid.captureassistant.AmbientLightFrequency, entry)
     for entry in _AmbientLightFrequencyEntries
 }
 AmbientLightFrequency = Enum(  # pylint: disable=invalid-name
@@ -38,15 +38,15 @@ class SuggestSettingsParameters:  # pylint: disable=too-few-public-methods
 
         Args:
             max_capture_time: an instance of datetime.timedelta
-            ambient_light_frequency: a member of the enum zivid.capture_assistant.AmbientLightFrequency
+            ambient_light_frequency: a member of the enum zivid.captureassistant.AmbientLightFrequency
 
         """
         if ambient_light_frequency is None:
-            self.__impl = _zivid.capture_assistant.SuggestSettingsParameters(
+            self.__impl = _zivid.captureassistant.SuggestSettingsParameters(
                 max_capture_time
             )
         else:
-            self.__impl = _zivid.capture_assistant.SuggestSettingsParameters(
+            self.__impl = _zivid.captureassistant.SuggestSettingsParameters(
                 max_capture_time,
                 _AmbientLightFrequencyToInternalMap[ambient_light_frequency.name],
             )
@@ -82,14 +82,14 @@ def suggest_settings(camera, suggest_settings_parameters):
 
     Args:
         camera: an instance of zivid.Camera
-        suggest_settings_parameters: an instance of zivid.capture_assistant.SuggestSettingsParameters which provides
+        suggest_settings_parameters: an instance of zivid.captureassistant.SuggestSettingsParameters which provides
                                      parameters (e.g., max capture time constraint) to the suggest_settings algorithm.
 
     Returns:
         List of Settings.
 
     """
-    internal_settings = _zivid.capture_assistant.suggest_settings(
+    internal_settings = _zivid.captureassistant.suggest_settings(
         camera._Camera__impl,  # pylint: disable=protected-access
         suggest_settings_parameters._SuggestSettingsParameters__impl,  # pylint: disable=protected-access
     )

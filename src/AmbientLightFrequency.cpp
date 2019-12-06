@@ -1,5 +1,5 @@
 #include <ZividPython/AmbientLightFrequency.h>
-#include <ZividPython/Capture_Assistant.h>
+#include <ZividPython/CaptureAssistant.h>
 
 #include <pybind11/pybind11.h>
 

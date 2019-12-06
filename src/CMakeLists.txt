@@ -8,7 +8,7 @@ set(SOURCES
     Environment.cpp
     Firmware.cpp
     HandEye.cpp
-    Capture_Assistant.cpp
+    CaptureAssistant.cpp
     SuggestSettingsParameters.cpp
     AmbientLightFrequency.cpp
     HDR.cpp

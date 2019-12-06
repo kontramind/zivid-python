@@ -1,4 +1,4 @@
-#include <ZividPython/Capture_Assistant.h>
+#include <ZividPython/CaptureAssistant.h>
 #include <ZividPython/SuggestSettingsParameters.h>
 
 #include <pybind11/pybind11.h>
