@@ -9,16 +9,8 @@ namespace ZividPython
 {
     void wrapClass(pybind11::class_<Zivid::CaptureAssistant::SuggestSettingsParameters> pyClass)
     {
-        pyClass
-            .def(py::init([](std::chrono::milliseconds &max_capture_time) {
-                     return std::make_unique<Zivid::CaptureAssistant::SuggestSettingsParameters>(max_capture_time);
-                 }),
-                 py::arg("max_capture_time"))
-            .def(py::init([](std::chrono::milliseconds &max_capture_time,
-                             Zivid::CaptureAssistant::AmbientLightFrequency &ambient_light_frequency) {
-                     return std::make_unique<Zivid::CaptureAssistant::SuggestSettingsParameters>(
-                         max_capture_time, ambient_light_frequency);
-                 }),
+        pyClass.def(py::init<std::chrono::milliseconds>(), py::arg("max_capture_time"))
+            .def(py::init<std::chrono::milliseconds, Zivid::CaptureAssistant::AmbientLightFrequency>(),
                  py::arg("max_capture_time"),
                  py::arg("ambient_light_frequency"))
             .def("maxCaptureTime", &Zivid::CaptureAssistant::SuggestSettingsParameters::maxCaptureTime)
