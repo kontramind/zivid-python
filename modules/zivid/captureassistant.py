@@ -1,28 +1,16 @@
 """Contains capture assistant functions and classes."""
-from enum import EnumMeta, Enum, _EnumDict
+from enum import Enum, unique
 
 import _zivid
 import zivid._settings_converter as _settings_converter
 
-
-class StrEnumMeta(EnumMeta):
-    def __new__(metacls, cls, bases, oldclassdict):
-        newclassdict = _EnumDict()
-        for k, v in oldclassdict.items():
-            if v == ():
-                v = k
-            newclassdict[k] = v
-        return super().__new__(metacls, cls, bases, newclassdict)
-
-class AutoStrEnum(str, Enum, metaclass=StrEnumMeta):
-    "base class for name=value str enums"
-
-class AmbientLightFrequency(AutoStrEnum):
+@unique
+class AmbientLightFrequency(Enum):
     """Ensure compatibility with the frequency of the ambient light in the scene."""
 
-    hz50 = ()
-    hz60 = ()
-    none = ()
+    hz50 = "hz50"
+    hz60 = "hz60"
+    none = "none"
 
     def __str__(self):
         return str(self.name)
