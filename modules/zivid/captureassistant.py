@@ -5,25 +5,26 @@ import _zivid
 import zivid._settings_converter as _settings_converter
 
 
-class _AmbientLightFrequencyEnumMeta(EnumMeta):
-
+class StrEnumMeta(EnumMeta):
     def __new__(metacls, cls, bases, oldclassdict):
         newclassdict = _EnumDict()
-        for member in _zivid.captureassistant.AmbientLightFrequency.__members__:
-            newclassdict[member] = str(member)
+        for k, v in oldclassdict.items():
+            if v == ():
+                v = k
+            newclassdict[k] = v
         return super().__new__(metacls, cls, bases, newclassdict)
 
+class AutoStrEnum(str, Enum, metaclass=StrEnumMeta):
+    "base class for name=value str enums"
 
-class AmbientLightFrequency(str, Enum, metaclass=_AmbientLightFrequencyEnumMeta):
-    '"""Ensure compatibility with the frequency of the ambient light in the scene."""'
+class AmbientLightFrequency(AutoStrEnum):
+    """Ensure compatibility with the frequency of the ambient light in the scene."""
+    hz50 = ()
+    hz60 = ()
+    none = ()
 
-
-setattr(AmbientLightFrequency, "__str__", lambda self: str(self.name))
-setattr(
-    AmbientLightFrequency,
-    "__doc__",
-    '"""Ensure compatibility with the frequency of the ambient light in the scene."""',
-)
+    def __str__(self):
+        return str(self.name)
 
 class SuggestSettingsParameters:  # pylint: disable=too-few-public-methods
     """Input to the Capture Assistant algorithm.
