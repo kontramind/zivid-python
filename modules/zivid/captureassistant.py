@@ -19,12 +19,16 @@ class AutoStrEnum(str, Enum, metaclass=StrEnumMeta):
 
 class AmbientLightFrequency(AutoStrEnum):
     """Ensure compatibility with the frequency of the ambient light in the scene."""
+
     hz50 = ()
     hz60 = ()
     none = ()
 
     def __str__(self):
         return str(self.name)
+
+
+assert AmbientLightFrequency.__members__.keys() == _zivid.captureassistant.AmbientLightFrequency.__members__.keys(), f"{AmbientLightFrequency} not in sync with C++ implementation."
 
 class SuggestSettingsParameters:  # pylint: disable=too-few-public-methods
     """Input to the Capture Assistant algorithm.
