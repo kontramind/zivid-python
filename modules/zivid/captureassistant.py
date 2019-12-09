@@ -1,28 +1,29 @@
 """Contains capture assistant functions and classes."""
-from enum import Enum
+from enum import EnumMeta, Enum, _EnumDict
 
 import _zivid
 import zivid._settings_converter as _settings_converter
 
 
-_AmbientLightFrequencyEntries = {  # pylint: disable=invalid-name
-    entry: entry
-    for entry in _zivid.captureassistant.AmbientLightFrequency.__entries  # pylint: disable=protected-access
-}
-_AmbientLightFrequencyToInternalMap = {  # pylint: disable=invalid-name
-    entry: getattr(_zivid.captureassistant.AmbientLightFrequency, entry)
-    for entry in _AmbientLightFrequencyEntries
-}
-AmbientLightFrequency = Enum(  # pylint: disable=invalid-name
-    "AmbientLightFrequency", _AmbientLightFrequencyEntries
-)
+class _AmbientLightFrequencyEnumMeta(EnumMeta):
+
+    def __new__(metacls, cls, bases, oldclassdict):
+        newclassdict = _EnumDict()
+        for member in _zivid.captureassistant.AmbientLightFrequency.__members__:
+            newclassdict[member] = str(member)
+        return super().__new__(metacls, cls, bases, newclassdict)
+
+
+class AmbientLightFrequency(str, Enum, metaclass=_AmbientLightFrequencyEnumMeta):
+    '"""Ensure compatibility with the frequency of the ambient light in the scene."""'
+
+
 setattr(AmbientLightFrequency, "__str__", lambda self: str(self.name))
 setattr(
     AmbientLightFrequency,
     "__doc__",
     '"""Ensure compatibility with the frequency of the ambient light in the scene."""',
 )
-
 
 class SuggestSettingsParameters:  # pylint: disable=too-few-public-methods
     """Input to the Capture Assistant algorithm.
@@ -48,7 +49,7 @@ class SuggestSettingsParameters:  # pylint: disable=too-few-public-methods
         else:
             self.__impl = _zivid.captureassistant.SuggestSettingsParameters(
                 max_capture_time,
-                _AmbientLightFrequencyToInternalMap[ambient_light_frequency.name],
+                getattr(_zivid.captureassistant.AmbientLightFrequency, ambient_light_frequency.name),
             )
 
     @property
